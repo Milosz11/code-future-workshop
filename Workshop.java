@@ -89,21 +89,26 @@ public class Workshop {
 			public String getName() {
 				return name;
 			}
-			//+ This method the name of the Robot instance you cast it on
-			//@ We will soon see that this method is unique for every instance of the Robot class because
-			//@ it returns a different name
+			//+ Here we create a method in our Robot class that will return the name variable so we can
+			//+ actually read what the name is.
+			//@ The method simply returns the name variable to wherever this method is called.
 		}
 
 		Robot robot1 = new Robot("Sparky");
+		//+ Now we declare and initialize a Robot, but this time we give the constructor a bit more info:
+		//+ a String of what name we'd like to give the Robot object
 
 		System.out.println(robot1.getName());
 		//& Ask the students what they think will get printed
 		//!
+		//@ Remember, in our constructor we set the object's 'name' variable and return the same
+		//@ variable through the getName() method
 
 		Robot robot2 = new Robot("Bop");
+		//@ Here we create another robot instance with a different name
 
 		System.out.println(robot2.getName());
-		//& Ask the students what they think will get printed
+		//& Ask the students what they think will get printed.
 		//!
 
 		// Step 5 - creating a method to set the name
@@ -119,29 +124,38 @@ public class Workshop {
 			}
 
 			public void setName(String newName) {
+				//+ Here our method isn't returning anything; it's setting some internal state of our Robot - the name.
+
 				name = newName;
+				//+ We take the String parameter and assign it to our class variable.
 			}
-			//+
 		}
 
 		robot2.setName("Zap");
-		//+
+		//+ We created robot2 with an initial name of Bop, but now we're assigning that name to be something new.
 
 		System.out.println(robot1.getName());
-		//+
-		System.out.println(robot2.getName());
-		//+
+		//& Ask the students what they think will get printed.
+		//!
 
-		// Step 6
+		System.out.println(robot2.getName());
+		//& Ask the students what they think will get printed.
+		//!
+		//@ Our robot2 object had its name set to something different, so it's not the name we created it with.
+
+		// Step 6 - more variables and methods
 		class Robot {
 			private String name;
 			private boolean isPoweredOn;
-			//+
+			//+ We will add another variable to the Robot class which will represent whether the Robot is
+			//+ turned on or off. A boolean will work perfectly.
+			//@ When the boolean is true, the robot will be on; when it's false, off.
 
 			public Robot(String inputName) {
 				name = inputName;
 				isPoweredOn = true;
-				//+
+				//+ When we create a Robot with our constructor, we can initialize more of its state.
+				//+ In this case, we'll say the the Robot is turned on when we create it.
 			}
 
 			public String getName() {
@@ -154,21 +168,22 @@ public class Workshop {
 
 			public boolean isPoweredOn() {
 				return isPoweredOn;
+				//@ This method returns our boolean variable telling us whether it's on or off
 			}
-			//+
 
 			public void powerUp() {
 				isPoweredOn = true;
 			}
-			//+
+			//@ Here we create a method that will turn the Robot on, regardless of its current state, so if
+			//@ it's already on, no harm is done
 
 			public void powerDown() {
 				isPoweredOn = false;
 			}
-			//+
+			//@ Similar to powerUp(), instead we turn if off
 		}
 
-		// Step 7
+		// Step 7 - adding a method to raise the robot's arm
 		class Robot {
 			private String name;
 			private boolean isPoweredOn;
@@ -200,35 +215,52 @@ public class Workshop {
 
 			public void liftRightArm() {
 				if (isPoweredOn) {
+					//@ If the robot is on,
 					System.out.println(name + " lifts its right arm.");
 				} else {
 					System.out.println(name + " is powered off!");
 				}
 			}
+			//@ This method will do something different based on the power state of the Robot.
+			//@ We will simply print the results so we can see them visually.
 
 		}
 
 		robot2.powerDown();
-		//+
+		//@ Our robots are initialized with a powered-on state. This will turn it off by setting the
+		//@ isPoweredOn boolean to false.
 
 		robot2.liftRightArm();
-		//+
+		//& Ask the students what they think will get printed. Refer back to the method if needed.
+		//!
+		//@ Since robot2 is currently turned off, our if clause doesn't execute, therefore the else clause does
 
 		Robot robot3 = new Robot("Scrapper");
-		//+
+		//@ We're going to create another robot
 
 		robot3.liftRightArm();
-		//+
+		//& Ask the students what they think will get printed.
+		//!
+		//@ One again, an initialized robot is in an on power state because that's how we've set up our
+		//@ constructor.
+
+		robot2.liftRightArm();
+		//@ We run this method again to see that robot2's state is independent of the newly created robot3,
+		//@ once again reiterating that each object has its own variable data.
 
 		if (robot3.isPoweredOn()) {
 			robot3.powerDown();
 		} else {
 			robot3.powerUp();
 		}
-		//+
+		//@ These lines of code essentially swap the power state of the Robot.
+		//@ We use the isPoweredOn() method on robot3 to check its state. If it is on, we turn it off,
+		//@ otherwise it's off, so we turn it back on.
 
 		robot3.liftRightArm();
-		//+
+		//& Ask the students what they think will get printed.
+		//!
+		//@ Being initialized on, we swap the power state of robot3 to off.
 
 	}
 }
